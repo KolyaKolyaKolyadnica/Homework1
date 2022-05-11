@@ -214,7 +214,7 @@
 // Возвращает логическое значение.
 {
   function checkForName(fullName, name) {
-    const result = fullName.indexOf(name) > 1? true: false; // Дополни эту строку
+    const result = fullName.indexOf(name) > -1? true: false; // Дополни эту строку
     return result;
   }
 
@@ -231,7 +231,7 @@
   function checkForSpam(message) {
     let result;
     // Пиши код ниже этой строки
-    if (message.toLowerCase().indexOf('spam') > 1 || message.toLowerCase().indexOf('sale') > 1) {
+    if (message.toLowerCase().indexOf('spam') > -1 || message.toLowerCase().indexOf('sale') > 1) {
       result = true;
     } else {
       result = false;

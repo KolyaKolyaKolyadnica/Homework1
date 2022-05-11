@@ -65,10 +65,11 @@
   const pricePerDrone = 800;
   const deliveryFee = 50;
   // Пиши код ниже этой строки
-  let totalPrice = undefined;
+  const totalPrice = orderedQuantity * pricePerDrone + deliveryFee;
   const message = `Вы заказали ${orderedQuantity} дронов на сумму ${pricePerDrone} кредитов. Доставка (${deliveryFee} кредитов) включена в сумму заказа.`;
   //
-  console.log('Task 6: '+message);
+  console.log('Task 6: ', message);  
+  console.log('Task 6: ', 'totalPrice = ', totalPrice);
   //
 }
 
@@ -77,7 +78,7 @@
 // Функция ничего не возвращает.
 {
   // Пиши код ниже этой строки
-  let sayHi = function () {
+  const sayHi = function () {
     console.log('Task 7: ' + 'Привет, это моя первая функция!');
   };
   sayHi();
@@ -171,4 +172,54 @@
 
   console.log('Task 12: ', isAdult(14));
   console.log('Task 12: ', isAdult(25));
+}
+
+
+// ============CodeWars==============
+
+{
+  
+  const arr = [9991, 2, -100, 0.5];
+  // const arr = [];
+
+  function sum (numbers) {
+    "use strict";
+    let result = 0;
+      if (numbers.length > 0){
+        for (let i = 0; i < numbers.length; i += 1){
+          result += numbers[i];
+        };
+      };
+    console.log(result);
+  };
+  
+  // sum(arr);
+}
+
+{
+  // const arr = [6, 2, 1, 8, 10];
+  // const arr = [1, 3, 3];
+  // const arr = [];
+  // const arr = null;
+  // const arr = NaN;
+  const arr = undefined;
+
+  if (arr !== undefined) {
+    console.log('dasda')
+  }
+
+  function sumArray(array) { 
+    let result = 0;
+    if (array !== null && array !== NaN && array !== undefined && array.length > 1) {
+      for (let i = 0; i < array.length; i += 1) {
+        result += array[i];
+      };
+      result = result - Math.min(...array) - Math.max(...array);            
+    };
+    console.log(result);
+  };
+  
+  sumArray(arr);
+  // console.log(Math.min(...arr));
+  // console.log(Math.max(...arr));
 }

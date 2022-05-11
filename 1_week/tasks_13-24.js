@@ -98,7 +98,7 @@
   function makeTransaction(pricePerDrone, orderedQuantity, customerCredits) {
     let message;
     // Пиши код ниже этой строки
-    let totalPrice = undefined;
+    let totalPrice = pricePerDrone * orderedQuantity;
     if (totalPrice > customerCredits) {
       message = 'Недостаточно средств на счету!';
     } else {
@@ -174,9 +174,9 @@
   function isNumberInRange(start, end, number) {    
     let isInRange
     if (number >= start && number <= end) {
-      isInRange = 'in range'; // дополни эту строку
+      isInRange = true; // дополни эту строку
     } else {
-      isInRange = 'no in range';
+      isInRange = false;
     };
     return isInRange;
   }
@@ -192,21 +192,14 @@
 // Функция должна возвращать canAccessContent.
 {
   function checkIfCanAccessContent(subType) {
-    // Не понимаю прикола с const canAccessContent = undefined;
-    //
-    // const canAccessContent = undefined; // дополни эту строку
-    // 
     let canAccessContent
     if (subType === 'pro' || subType === 'vip') {
-      canAccessContent = 'Access is allowed';
-    } else if (subType === 'basic') {
-      canAccessContent = 'Access is denied';
+      canAccessContent = true;
     } else {
-      canAccessContent = 'Check your status';
-    }
-    
+      canAccessContent = false;
+    };    
     return canAccessContent;
-  }
+  };
 
   console.log('Task 21: ', checkIfCanAccessContent('basic'));
   console.log('Task 21: ', checkIfCanAccessContent('pro'));
