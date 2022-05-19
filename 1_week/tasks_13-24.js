@@ -11,7 +11,7 @@
       isMatch = true;
     } else {
       isMatch = false;
-    };
+    }
     return isMatch;
     // Пиши код выше этой строки
   }
@@ -102,7 +102,9 @@
     if (totalPrice > customerCredits) {
       message = 'Недостаточно средств на счету!';
     } else {
-      message = `Вы купили ${orderedQuantity} дронов, на счету осталось ${customerCredits - pricePerDrone * orderedQuantity} кредитов`;
+      message = `Вы купили ${orderedQuantity} дронов, на счету осталось ${
+        customerCredits - pricePerDrone * orderedQuantity
+      } кредитов`;
     }
     // Пиши код выше этой строки
     return message;
@@ -171,13 +173,13 @@
 // Функция определяет находится ли переданное число в указанном числовом диапазоне.
 // Функция должна возвращать isInRange.
 {
-  function isNumberInRange(start, end, number) {    
-    let isInRange
+  function isNumberInRange(start, end, number) {
+    let isInRange;
     if (number >= start && number <= end) {
       isInRange = true; // дополни эту строку
     } else {
       isInRange = false;
-    };
+    }
     return isInRange;
   }
 
@@ -192,14 +194,14 @@
 // Функция должна возвращать canAccessContent.
 {
   function checkIfCanAccessContent(subType) {
-    let canAccessContent
+    let canAccessContent;
     if (subType === 'pro' || subType === 'vip') {
       canAccessContent = true;
     } else {
       canAccessContent = false;
-    };    
+    }
     return canAccessContent;
-  };
+  }
 
   console.log('Task 21: ', checkIfCanAccessContent('basic'));
   console.log('Task 21: ', checkIfCanAccessContent('pro'));
@@ -240,7 +242,7 @@
       discount = GOLD_DISCOUNT;
     } else if (totalSpent >= 20000) {
       discount = SILVER_DISCOUNT;
-    } else if (totalSpent >=5000 && totalSpent < 20000) {
+    } else if (totalSpent >= 5000 && totalSpent < 20000) {
       discount = BRONZE_DISCOUNT;
     } else {
       discount = BASE_DISCOUNT;
@@ -264,7 +266,10 @@
   function checkStorage(available, ordered) {
     let message;
     // Пиши код ниже этой строки
-    message = ordered > available? 'На складе недостаточно товаров!': 'Заказ оформлен, с вами свяжется менеджер';
+    message =
+      ordered > available
+        ? 'На складе недостаточно товаров!'
+        : 'Заказ оформлен, с вами свяжется менеджер';
     // Пиши код выше этой строки
     return message;
   }

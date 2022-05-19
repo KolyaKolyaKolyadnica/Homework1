@@ -5,7 +5,7 @@
   // Пиши код ниже этой строки
   const productName = 'string ';
   const pricePerItem = 69;
-  console.log('Task 1: '+productName+pricePerItem);
+  console.log('Task 1: ' + productName + pricePerItem);
   //
 }
 
@@ -18,7 +18,7 @@
   let pricePerItem = 69;
   productName = 'new string ';
   pricePerItem = 101;
-  console.log('Task 2: '+productName+pricePerItem );
+  console.log('Task 2: ' + productName + pricePerItem);
   //
 }
 
@@ -41,7 +41,7 @@
   const orderedQuantity = 4;
   // Пиши код ниже этой строки
   let result = pricePerItem * orderedQuantity;
-  console.log('Task 4: '+result);
+  console.log('Task 4: ' + result);
   //
 }
 
@@ -53,7 +53,10 @@
   const pricePerItem = 3500;
   // Пиши код ниже этой строки
 
-  console.log('Task 5: '+`Вы выбрали ${productName}, цена за штуку ${pricePerItem} кредитов`);
+  console.log(
+    'Task 5: ' +
+      `Вы выбрали ${productName}, цена за штуку ${pricePerItem} кредитов`
+  );
   //
 }
 
@@ -68,7 +71,7 @@
   const totalPrice = orderedQuantity * pricePerDrone + deliveryFee;
   const message = `Вы заказали ${orderedQuantity} дронов на сумму ${pricePerDrone} кредитов. Доставка (${deliveryFee} кредитов) включена в сумму заказа.`;
   //
-  console.log('Task 6: ', message);  
+  console.log('Task 6: ', message);
   console.log('Task 6: ', 'totalPrice = ', totalPrice);
   //
 }
@@ -84,7 +87,6 @@
   sayHi();
   //
 }
-
 
 /* *** Task 8 *** */
 // Отредактировать функцию add так, чтобы она принимала 3 параметра (a, b, c).
@@ -159,67 +161,89 @@
 {
   function isAdult(age) {
     // Пиши код ниже этой строки
-    let passed
+    let passed;
 
-    if (age >= 18) {      
+    if (age >= 18) {
       passed = true;
     } else {
       passed = false;
-    };
+    }
     // Пиши код выше этой строки
     return passed;
-  };
+  }
 
   console.log('Task 12: ', isAdult(14));
   console.log('Task 12: ', isAdult(25));
 }
 
-
 // ============CodeWars==============
 
+// {
+//   const arr = [9991, 2, -100, 0.5];
+//   // const arr = [];
+
+//   function sum(numbers) {
+//     'use strict';
+//     let result = 0;
+//     if (numbers.length > 0) {
+//       for (let i = 0; i < numbers.length; i += 1) {
+//         result += numbers[i];
+//       }
+//     }
+//     console.log(result);
+//   }
+
+//   // sum(arr);
+// }
+
+// {
+//   // const arr = [6, 2, 1, 8, 10];
+//   // const arr = [1, 3, 3];
+//   // const arr = [];
+//   // const arr = null;
+//   // const arr = NaN;
+//   const arr = undefined;
+
+//   if (arr !== undefined) {
+//     console.log('dasda');
+//   }
+
+//   function sumArray(array) {
+//     let result = 0;
+//     if (
+//       array !== null &&
+//       array !== NaN &&
+//       array !== undefined &&
+//       array.length > 1
+//     ) {
+//       for (let i = 0; i < array.length; i += 1) {
+//         result += array[i];
+//       }
+//       result = result - Math.min(...array) - Math.max(...array);
+//     }
+//     console.log(result);
+//   }
+
+//   sumArray(arr);
+//   // console.log(Math.min(...arr));
+//   // console.log(Math.max(...arr));
+// }
+
 {
-  
-  const arr = [9991, 2, -100, 0.5];
-  // const arr = [];
+  let arr = [-52, 56, 30, 29, -54, 0, -110];
+  // console.log(typeof arr[5]);
+  // console.log(Math.max(arr));
 
-  function sum (numbers) {
-    "use strict";
-    let result = 0;
-      if (numbers.length > 0){
-        for (let i = 0; i < numbers.length; i += 1){
-          result += numbers[i];
-        };
-      };
-    console.log(result);
+  var min = function (list) {
+    console.log(Math.min.apply(null, list));
+    console.log(list.indexOf(Math.min.apply(null, list)));
+    // return list[1];
   };
-  
-  // sum(arr);
-}
 
-{
-  // const arr = [6, 2, 1, 8, 10];
-  // const arr = [1, 3, 3];
-  // const arr = [];
-  // const arr = null;
-  // const arr = NaN;
-  const arr = undefined;
-
-  if (arr !== undefined) {
-    console.log('dasda')
-  }
-
-  function sumArray(array) { 
-    let result = 0;
-    if (array !== null && array !== NaN && array !== undefined && array.length > 1) {
-      for (let i = 0; i < array.length; i += 1) {
-        result += array[i];
-      };
-      result = result - Math.min(...array) - Math.max(...array);            
-    };
-    console.log(result);
+  var max = function (list) {
+    // return list[0];
   };
-  
-  sumArray(arr);
-  // console.log(Math.min(...arr));
-  // console.log(Math.max(...arr));
+
+  min(arr);
+  max(arr);
 }

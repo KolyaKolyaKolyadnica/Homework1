@@ -8,7 +8,10 @@
     const ADMIN_PASSWORD = 'jqueryismyjam';
     let message;
     // Пиши код ниже этой строки
-    message = password === ADMIN_PASSWORD? 'Доступ разрешен': 'Доступ запрещен, неверный пароль!';
+    message =
+      password === ADMIN_PASSWORD
+        ? 'Доступ разрешен'
+        : 'Доступ запрещен, неверный пароль!';
     return message;
     // Пиши код выше этой строки
   }
@@ -101,7 +104,7 @@
         break;
       case 'Австралия':
         message = `Доставка в ${country} будет стоить 100 кредитов`;
-        break;     
+        break;
       default:
         message = 'Извините, в вашу страну доставки нет';
     }
@@ -146,7 +149,7 @@
   // const lastElement = courseTopicArr[courseTopicArr.length - 1];
 
   // Если первый элемент это символ
-  
+
   const courseTopicLength = courseTopic.length;
   const firstElement = courseTopic[0];
   const lastElement = courseTopic[courseTopic.length - 1];
@@ -192,7 +195,10 @@
 
   console.log(
     'Task 32: ',
-    formatMessage('Привет! Я JavaSсript! Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 15)
+    formatMessage(
+      'Привет! Я JavaSсript! Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      15
+    )
   );
 }
 
@@ -214,7 +220,7 @@
 // Возвращает логическое значение.
 {
   function checkForName(fullName, name) {
-    const result = fullName.indexOf(name) > -1? true: false; // Дополни эту строку
+    const result = fullName.indexOf(name) > -1 ? true : false; // Дополни эту строку
     return result;
   }
 
@@ -231,7 +237,10 @@
   function checkForSpam(message) {
     let result;
     // Пиши код ниже этой строки
-    if (message.toLowerCase().indexOf('spam') > -1 || message.toLowerCase().indexOf('sale') > 1) {
+    if (
+      message.toLowerCase().indexOf('spam') > -1 ||
+      message.toLowerCase().indexOf('sale') > 1
+    ) {
       result = true;
     } else {
       result = false;
