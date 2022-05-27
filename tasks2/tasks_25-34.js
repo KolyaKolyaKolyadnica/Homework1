@@ -214,10 +214,10 @@
 //   console.log([4, 5, 8, 12].find(isPrime)); // 5
 // }
 
-{
-  //=====Codewars=====
+// {
+//=====Codewars=====
 
-  /*
+/*
 Imagine two rings with numbers on them. The inner ring spins clockwise (decreasing by 1 each spin) and the outer ring spins counter clockwise 
 (increasing by 1 each spin). We start with both rings aligned on 0 at the top, and on each move we spin each ring one increment. How many moves 
 will it take before both rings show the same number at the top again?
@@ -241,46 +241,110 @@ Therefore it takes 2 moves for the two rings to reach the same number
 spinningRings(3, 2) = 2
 */
 
-  function spinningRings(innerMax, outerMax) {
-    const arrayInner = [];
-    const arrayOuter = [];
+//   function spinningRings(innerMax, outerMax) {
+//     const arrayInner = [];
+//     const arrayOuter = [];
 
-    for (let i = 0; i <= innerMax; i += 1) {
-      arrayInner[i] = i;
-    }
-    arrayInner.reverse().splice(0, 0, 0);
-    arrayInner.pop();
+//     for (let i = 0; i <= innerMax; i += 1) {
+//       arrayInner[i] = i;
+//     }
+//     arrayInner.reverse().splice(0, 0, 0);
+//     arrayInner.pop();
 
-    for (let i = 0; i <= outerMax; i += 1) {
-      arrayOuter[i] = i;
-    }
+//     for (let i = 0; i <= outerMax; i += 1) {
+//       arrayOuter[i] = i;
+//     }
 
-    let arrayInnerPlusInner = [];
-    let arrayOuterPlusOuter = [];
+//     let arrayInnerPlusInner = [];
+//     let arrayOuterPlusOuter = [];
 
-    for (let i = 1; i < i + 1; i += 1) {
-      arrayInnerPlusInner = arrayInner.concat(arrayInnerPlusInner);
-      arrayOuterPlusOuter = arrayOuter.concat(arrayOuterPlusOuter);
+//     for (let i = 1; i < i + 1; i += 1) {
+//       arrayInnerPlusInner = arrayInner.concat(arrayInnerPlusInner);
+//       arrayOuterPlusOuter = arrayOuter.concat(arrayOuterPlusOuter);
 
-      if (arrayInnerPlusInner[i] === arrayOuterPlusOuter[i]) {
-        return i;
-      }
-    }
-  }
+//       if (arrayInnerPlusInner[i] === arrayOuterPlusOuter[i]) {
+//         return i;
+//       }
+//     }
+//   }
 
-  console.log(spinningRings(2, 3));
-}
+//   console.log(spinningRings(2, 3));
+// }
+
+// {
+//   function reverseWords(str) {
+//     let arr = str.split(' ');
+//     let arrReverse = [];
+
+//     for (let i = 0; i < arr.length; i += 1) {
+//       arrReverse.push(arr[i].split('').reverse().join(''));
+//     }
+
+//     return arrReverse.join(' ');
+//   }
+//   console.log(reverseWords('The quick brown fox jumps over the lazy dog.'));
+// }
+
+// {
+//   function descendingOrder(n) {
+//     const smallstringArr = String(n).split('');
+//     const bigStringArr = [];
+
+//     for (let j = 9; j >= 0; j -= 1) {
+//       for (let i = 0; i <= smallstringArr.length; i += 1) {
+//         if (Number(smallstringArr[i]) === j) {
+//           bigStringArr.push(smallstringArr[i]);
+//           console.log(bigStringArr);
+//         }
+//       }
+//     }
+//     return Number(bigStringArr.join(''));
+//   }
+
+//   console.log(descendingOrder(0));
+// }
 
 {
-  function reverseWords(str) {
-    let arr = str.split(' ');
-    let arrReverse = [];
+  function disemvowel(str) {
+    const arrStrInput = str.split('');
+    const arrVowel = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'];
+    const arrStrOutput = [];
 
-    for (let i = 0; i < arr.length; i += 1) {
-      arrReverse.push(arr[i].split('').reverse().join(''));
+    for (let i = 0; i < str.split('').length; i += 1) {
+      console.log(arrStrInput[i]);
+      if (!arrVowel.includes(arrStrInput[i])) {
+        arrStrOutput.push(arrStrInput[i]);
+      }
     }
-
-    return arrReverse.join(' ');
+    return arrStrOutput.join('');
   }
-  console.log(reverseWords('The quick brown fox jumps over the lazy dog.'));
+
+  console.log(disemvowel('This website is for losers LOL!'));
+  console.log(
+    disemvowel(
+      `No offense but,\nYour writing is among the worst I've ever read`
+    )
+  );
+  console.log(disemvowel('This weeeg'));
 }
+// 'N ffns but,\nYur wrtng s mng th wrst \'v vr rad'
+// to equal
+// 'N ffns bt,\nYr wrtng s mng th wrst \'v vr rd'
+
+// for (let i = 0; i <= arrStr.length; i += 1) {
+//   if (
+//     arrStr[i] === 'a' ||
+//     arrStr[i] === 'e' ||
+//     arrStr[i] === 'i' ||
+//     arrStr[i] === 'o' ||
+//     arrStr[i] === 'u' ||
+//     arrStr[i] === 'A' ||
+//     arrStr[i] === 'E' ||
+//     arrStr[i] === 'I' ||
+//     arrStr[i] === 'O' ||
+//     arrStr[i] === 'U'
+//   ) {
+//     arrStr.splice(i, 1);
+//   }
+// }
+// return arrStr.join('');
