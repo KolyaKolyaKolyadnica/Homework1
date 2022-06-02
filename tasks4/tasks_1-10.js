@@ -8,10 +8,10 @@
   }
   // Пиши код ниже этой строки
 
-  const result = undefined;
-  const pointer = undefined;
+  const result = makePizza();
+  const pointer = makePizza;
 
-  console.log('Task 1: ');
+  console.log('Task 1: ', result, pointer);
   //
 }
 
@@ -29,24 +29,40 @@
   }
 
   // Пиши код ниже этой строки
-  console.log('Task 2: ');
+  function makeMessage(pizzaName, callback) {
+    return callback(pizzaName);
+  }
+  console.log(
+    'Task 2: ',
+    makeMessage('Pepperoni', makePizza),
+    makeMessage('Pepperoni', deliverPizza)
+  );
 }
 
 /* *** Task 3 *** */
 // Допишите функцию makePizza и ее вызов с 2 функциями-колбеками
 {
   // Пиши код ниже этой строки
-  function makePizza() {
-    // console.log(`Пицца *НАЗВАНИЕ ПИЦЦЫ* готовится, ожидайте...`);
+  function makePizza(pizzaName, callback) {
+    console.log(`Пицца ${pizzaName} готовится, ожидайте...`);
     // колбек, который приходит как аргумент функции, с именем пиццы в качестве параметра;
+    return callback(pizzaName);
   }
 
   makePizza(
-    'Ультрасыр' /*опишите ПРЯМО ЗДЕСЬ (Function Declaration) вторым параметром функцию-колбек доставитьПиццу, которая консолит "Доставляем пиццу *НАЗВАНИЕ ПИЦЦЫ*"*/
+    'Ультрасыр' /*опишите ПРЯМО ЗДЕСЬ (Function Declaration) вторым параметром функцию-колбек доставитьПиццу, которая консолит "Доставляем пиццу *НАЗВАНИЕ ПИЦЦЫ*"*/,
+    function deliverPizza(pizzaName) {
+      // Функция с названием (deliverPizza)
+      console.log(`Доставляем пиццу ${pizzaName}`);
+    }
   );
 
   makePizza(
-    'Роял гранд' /*опишите ПРЯМО ЗДЕСЬ (Function Declaration) вторым параметром функцию-колбек кушатьПиццу, которая консолит "Едим пиццу *НАЗВАНИЕ ПИЦЦЫ*"*/
+    'Роял гранд' /*опишите ПРЯМО ЗДЕСЬ (Function Declaration) вторым параметром функцию-колбек кушатьПиццу, которая консолит "Едим пиццу *НАЗВАНИЕ ПИЦЦЫ*"*/,
+    function (pizzaName) {
+      // Функция без названия
+      console.log(`Едим пиццу ${pizzaName}`);
+    }
   );
 
   // Пиши код выше этой строки
@@ -61,7 +77,17 @@
 // если такой пиццы нет - вызывается коллбек2 (ошибка)
 {
   // Пиши код ниже этой строки
-  const pizzaPalace = {};
+  const pizzaPalace = {
+    menu: ['Ультрасыр', 'Аль Копчино', 'Четыре нарезона'],
+    order(pizzaName, onSuccess, onOrderError) {
+      if (this.menu.includes(pizzaName)) {
+        console.log(onSuccess(pizzaName)); // т.к. візов функции не в консол логе
+        return onSuccess(pizzaName);
+      }
+      console.log(onOrderError(pizzaName)); // т.к. візов функции не в консол логе
+      return onOrderError(pizzaName);
+    },
+  };
   // Пиши код выше этой строки
 
   // Колбэк для onSuccess
@@ -75,6 +101,13 @@
   }
 
   // Вызовите методы с колбэками
+
+  //Просто добавить колбєки в вызов ф-ции?
+  pizzaPalace.order('Аль Копчино', makePizza, onOrderError);
+  pizzaPalace.order('Четыре нарезона', makePizza, onOrderError);
+  pizzaPalace.order('Биг майк', makePizza, onOrderError);
+  pizzaPalace.order('Венская', makePizza, onOrderError);
+
   //pizzaPalace.order('Аль Копчино');
   //pizzaPalace.order('Четыре нарезона');
   //pizzaPalace.order('Биг майк');
@@ -93,10 +126,38 @@
 // если такая пицца есть - `Заказ принят, готовим пиццу «НАЗВАНИЕ ПИЦЦЫ».
 {
   // Пиши код ниже этой строки
-  const pizzaPalace = {};
-  // Пиши код выше этой строки
+  const pizzaPalace = {
+    menu: ['Ультрасыр', 'Аль Копчино', 'Четыре нарезона'],
+    checkPizzaName(pizzaName) {
+      const { menu } = pizzaPalace;
 
-  console.log('Task 5: ');
+      /*
+      console.log('this.menu ', this.menu); // Почему undefernd??????
+      console.log('pizzaPalace.menu ', pizzaPalace.menu); // Так не надежно поєтому сделал деструктуризацию
+      */
+
+      return menu.includes(pizzaName);
+    },
+    orderPizza(pizzaName, callback) {
+      // return callback
+      //   ? `Заказ принят, готовим пиццу ${pizzaName}`
+      //   : `В ассортименте нет пиццы с названием ${pizzaName}`;
+      // console.log(callback);
+      // console.log(this.callback);
+      if (callback(pizzaName)) {
+        return `Заказ принят, готовим пиццу ${pizzaName}`;
+      }
+      return `В ассортименте нет пиццы с названием ${pizzaName}`;
+    },
+  };
+  // Пиши код выше этой строки
+  const { checkPizzaName, orderPizza } = pizzaPalace;
+
+  console.log('========= Start 5 ========');
+
+  console.log('Task 5: ', orderPizza('Аль Копчино', checkPizzaName));
+
+  console.log('========== End 5 ==========');
   //
 }
 
@@ -116,15 +177,30 @@
     discount: 0.1,
     orders: ['Burger', 'Pizza', 'Salad'],
     // Пиши код ниже этой строки
-
+    getBalance() {
+      return this.balance;
+    },
+    getDiscount() {
+      return this.discount;
+    },
+    addDiscount(newDiscount) {
+      return (this.discount = newDiscount);
+    },
+    getOrders() {
+      return this.orders;
+    },
+    addOrder(cost, dish) {
+      this.balance -= cost - cost * this.discount;
+      this.orders.push(dish);
+    },
     // Пиши код выше этой строки
   };
 
-  // customer.установитьДисконт(0.15);
-  // console.log(customer.получитьДисконт()); // 0.15
-  // customer.добавитьЗаказ(5000, 'Steak');
-  // console.log(customer.получитьБаланс); // 19750
-  // console.log(customer.получитьЗаказы); // ['Burger', 'Pizza', 'Salad', 'Steak']
+  customer.addDiscount(0.15);
+  console.log(customer.getDiscount()); // 0.15
+  customer.addOrder(5000, 'Steak');
+  console.log(customer.getBalance()); // 19750   ----  Поставил () после customer.getBalance
+  console.log(customer.getOrders()); // ['Burger', 'Pizza', 'Salad', 'Steak']   ----  Поставил () после customer.getOrders
   console.log('Task 6: ');
   //
 }
@@ -134,6 +210,8 @@
 // возвращает строку "Готовим *НАЗВАНИЕ БЛЮДА* для *АДРЕС ПОЧТЫ email*. Ваш заказ *НОМЕР ПОЗИЦИИ*-й в очереди.""
 // Запишите в переменную messages результаты вызова этой функции для каждого заказа в массиве orders (Используйте map и call)
 {
+  console.log('======== Task 7: ========');
+
   const orders = [
     { email: 'solomon@topmail.ua', dish: 'Burger' },
     { email: 'artemis@coldmail.net', dish: 'Pizza' },
@@ -141,15 +219,34 @@
   ];
 
   // Пиши код ниже этой строки
-  function composeMessage() {}
+  function composeMessage(position) {
+    if (!orders[position]) {
+      return 'Немає такої позиції!';
+    }
 
-  console.log('Task 7: ');
+    const arrEmail = orders.map((orders) => orders.email);
+    const arrDish = orders.map((orders) => orders.dish);
+
+    // const arrEmail = orders.map(function callback(orders) {
+    //   return orders.email;
+    // });
+    // const arrDish = orders.map(function callback(orders) {
+    //   return orders.dish;
+    // });
+
+    return `Готовим ${arrDish[position]} для ${arrEmail[position]}. Ваш заказ ${position}-й в очереди.`;
+  }
+
+  composeMessage.call(this, 2);
+  console.log('Task 7: ', composeMessage.call(this, 2)); // а нафіга!? чого просто не визвати composeMessage(2)
   //
 }
 
 /* *** Task 8 *** */
 // То же самое что и в задании 7, но используйте apply для вызова функций
 {
+  console.log('======== Task 8: ========');
+
   const orders = [
     { email: 'solomon@topmail.ua', dish: 'Burger' },
     { email: 'artemis@coldmail.net', dish: 'Pizza' },
@@ -157,9 +254,14 @@
   ];
 
   // Пиши код ниже этой строки
-  function composeMessage() {}
+  function composeMessage(position) {
+    const arrEmail = orders.map((orders) => orders.email);
+    const arrDish = orders.map((orders) => orders.dish);
 
-  console.log('Task 8: ');
+    return `Готовим ${arrDish[position]} для ${arrEmail[position]}. Ваш заказ ${position}-й в очереди.`;
+  }
+
+  console.log('Task 8: ', composeMessage.apply(this, [1]));
 }
 
 /* *** Task 9 *** */
@@ -167,6 +269,8 @@
 // В переменную pizzaPalaceMessage запишите результат вызова pizzaPalaceComposer. customerName - Манго
 // Аналогичные действия проделайте с burgerShackComposer и burgerShackMessage. customerName - Поли
 {
+  console.log('======== Task 9: ========');
+
   const pizzaPalace = {
     company: 'Pizza Palace',
   };
@@ -180,20 +284,22 @@
   }
   // Пиши код ниже этой строки
 
-  const pizzaPalaceComposer = undefined;
-  const pizzaPalaceMessage = undefined;
+  const pizzaPalaceComposer = composeMessage.bind(pizzaPalace, 'Манго');
+  const pizzaPalaceMessage = pizzaPalaceComposer();
+  console.log(pizzaPalaceMessage);
 
-  const burgerShackComposer = undefined;
-  const burgerShackMessage = undefined;
+  const burgerShackComposer = composeMessage.bind(burgerShack, 'Поли');
+  const burgerShackMessage = burgerShackComposer();
+  console.log(burgerShackMessage);
 
   console.log('Task 9: ');
 }
 
 /* *** Task 10 *** */
 // В объекте service реализуйте методы
-// - подписаться, который принимает почту как параметр, записывает ее в массив mailingList и возвращает строку
+// - подписаться, который принимает почту как параметр, записывает ее в массив mailingList и возвращает строку  !!!!!!!!!!
 //    `Почта *АДРЕС ПОЧТЫ* добавлена в рассылку.`
-// - отписаться, который принимает почту как параметр, удаляет ее из массива mailingList и возвращает строку
+// - отписаться, который принимает почту как параметр, удаляет ее из массива mailingList и возвращает строку  !!!!!!!!!!
 //    `Почта *АДРЕС ПОЧТЫ* удалена из рассылки.`
 // Также отдельно реализуйте функцию logAndInvokeAction, которая принимает 2 параметра: email и action
 // Функция консолит `Выполняем действие с *АДРЕС ПОЧТЫ*.` и возвращает ВЫЗОВ функции с параметром почты.
@@ -203,24 +309,59 @@
 // с уже существующим адресом почты "kiwi@mail.uk" в контексте метода "отписаться" объекта service.
 // Используйте bind.
 {
+  console.log('======== Task 10: ========');
+
   const service = {
     mailingList: ['mango@mail.com', 'poly@hotmail.de', 'ajax@jmail.net'],
     // !!! дополнить здесь
+    subscribe(email) {
+      this.mailingList.push(email);
+      return `Почта ${email} добавлена в рассылку.`;
+    },
+    unsubscribe(email) {
+      const emailsIndex = this.mailingList.indexOf(email);
+
+      if (emailsIndex < 0) {
+        return `Вы и так не подписаны на почту ${email} .`;
+      }
+
+      this.mailingList.splice(emailsIndex, 1);
+
+      return `Почта ${email} удалена из рассылки.`;
+    },
   };
 
-  function logAndInvokeAction() {} // !!! дополнить здесь
+  function logAndInvokeAction(email, action) {
+    console.log('action ', action);
+
+    console.log(`Выполняем действие с ${email}.`);
+    return action(email);
+  } // !!! дополнить здесь
+
+  // console.log(
+  //   logAndInvokeAction('test@mail.ua', service.subscribe.bind(service))
+  // );
 
   console.log('Task 10: ');
-  const firstInvoke = logAndInvokeAction(); // !!! дополнить здесь
+  const firstInvoke = logAndInvokeAction(
+    'kiwi@mail.uk',
+    service.subscribe.bind(service)
+  ); // !!! дополнить здесь
   console.log(firstInvoke);
-  // Почта kiwi@mail.uk добавлена в рассылку.
+
+  // // Почта kiwi@mail.uk добавлена в рассылку.
 
   console.log(service.mailingList);
-  /* ['mango@mail.com', 
-      'poly@hotmail.de', 
-      'ajax@jmail.net', 
+
+  /* ['mango@mail.com',
+      'poly@hotmail.de',
+      'ajax@jmail.net',
       'kiwi@mail.uk']*/
-  const secondInvoke = logAndInvokeAction(); // !!! дополнить здесь
+
+  const secondInvoke = logAndInvokeAction(
+    'kiwi@mail.uk',
+    service.unsubscribe.bind(service)
+  ); // !!! дополнить здесь
   console.log(secondInvoke);
   // Почта poly@hotmail.de удалена из рассылки.
 
