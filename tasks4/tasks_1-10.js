@@ -242,7 +242,6 @@
       { email: 'artemis@coldmail.net', dish: 'Pizza' },
       { email: 'jacob@mail.com', dish: 'Taco' },
     ];
-
     // Пиши код ниже этой строки
 
     function composeMessage(index) {
