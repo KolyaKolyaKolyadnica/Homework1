@@ -218,198 +218,147 @@
     { email: 'jacob@mail.com', dish: 'Taco' },
   ];
 
-  // Пиши код ниже этой строки
-  // // let messages = orders.map(composeMessage.call(this));
-  // // let messages = orders.map(test);
-  // // console.log();
-
-  // // let messages = orders.map(test);
-
-  // function test() {
-  //   console.log('test');
-
-  //   composeMessage.call(this);
-  //   console.log(composeMessage.call(this));
-  // }
-
-  // // function composeMessage(objOfOrders) {
-  // //   console.log(
-  // //     `Готовим ${objOfOrders.dish} для ${
-  // //       this.email
-  // //     }. Ваш заказ ${1}-й в очереди.`
-  // //   );
-
-  // // return `Готовим ${this.dish} для ${
-  // //   this.email
-  // // }. Ваш заказ ${1}-й в очереди.`;
-  // // }
-
-  // function composeMessage(position) {
-  //   // if (!orders[position]) {
-  //   //   return 'Немає такої позиції!';
-  //   // }
-
-  //   const arrEmail = orders.map((orders) => orders.email);
-  //   const arrDish = orders.map((orders) => orders.dish);
-
-  //   // const arrEmail = orders.map(function callback(orders) {
-  //   //   return orders.email;
-  //   // });
-  //   // const arrDish = orders.map(function callback(orders) {
-  //   //   return orders.dish;
-  //   // });
-
-  //   return `Готовим ${arrDish[position]} для ${arrEmail[position]}. Ваш заказ ${position}-й в очереди.`;
-  // }
-
-  // // composeMessage.call(this, 2);
-  let messages = orders.map(funForEachObj);
-
-  function funForEachObj(currentValue) {
-    // composeMessage.call(orders);
-    // composeMessage.call(this);
-    // console.log(orders);
-    console.log(Object.keys(orders));
-    console.log(Object.values(orders));
-    console.log(Object.getOwnPropertyNames(orders));
-    Object.keys(orders);
-    Object.getOwnPropertyNames;
+  function composeMessage(index) {
+    return `Готовим ${this.dish} для ${this.email}. Ваш заказ ${
+      index + 1
+    }-й в очереди.`;
   }
 
-  function composeMessage(position) {
-    console.log(this);
-  }
+  let messages = orders.map((order, index) =>
+    composeMessage.call(order, index)
+  );
 
-  console.log('messages ', messages);
-
-  console.log('Task 7: ', messages); // а нафіга!? чого просто не визвати composeMessage(2)
-  //
+  console.log('Task 7: ', messages);
 }
 
-// {
-//   /* *** Task 8 *** */
-//   // То же самое что и в задании 7, но используйте apply для вызова функций
-//   {
-//     console.log('======== Task 8: ========');
+{
+  /* *** Task 8 *** */
+  // То же самое что и в задании 7, но используйте apply для вызова функций
+  {
+    console.log('======== Task 8: ========');
 
-//     const orders = [
-//       { email: 'solomon@topmail.ua', dish: 'Burger' },
-//       { email: 'artemis@coldmail.net', dish: 'Pizza' },
-//       { email: 'jacob@mail.com', dish: 'Taco' },
-//     ];
+    const orders = [
+      { email: 'solomon@topmail.ua', dish: 'Burger' },
+      { email: 'artemis@coldmail.net', dish: 'Pizza' },
+      { email: 'jacob@mail.com', dish: 'Taco' },
+    ];
 
-//     // Пиши код ниже этой строки
-//     function composeMessage(position) {
-//       const arrEmail = orders.map((orders) => orders.email);
-//       const arrDish = orders.map((orders) => orders.dish);
+    // Пиши код ниже этой строки
 
-//       return `Готовим ${arrDish[position]} для ${arrEmail[position]}. Ваш заказ ${position}-й в очереди.`;
-//     }
+    function composeMessage(index) {
+      return `Готовим ${this.dish} для ${this.email}. Ваш заказ ${
+        index + 1
+      }-й в очереди.`;
+    }
 
-//     console.log('Task 8: ', composeMessage.apply(this, [1]));
-//   }
+    let messages = orders.map((order, index) =>
+      composeMessage.apply(order, [index])
+    );
 
-//   /* *** Task 9 *** */
-//   // Используя bind создайте переменную pizzaPalaceComposer, в которую будет "привязан" объект pizzaPalace
-//   // В переменную pizzaPalaceMessage запишите результат вызова pizzaPalaceComposer. customerName - Манго
-//   // Аналогичные действия проделайте с burgerShackComposer и burgerShackMessage. customerName - Поли
-//   {
-//     console.log('======== Task 9: ========');
+    console.log('Task 8: ', messages);
+  }
 
-//     const pizzaPalace = {
-//       company: 'Pizza Palace',
-//     };
+  /* *** Task 9 *** */
+  // Используя bind создайте переменную pizzaPalaceComposer, в которую будет "привязан" объект pizzaPalace
+  // В переменную pizzaPalaceMessage запишите результат вызова pizzaPalaceComposer. customerName - Манго
+  // Аналогичные действия проделайте с burgerShackComposer и burgerShackMessage. customerName - Поли
+  {
+    console.log('======== Task 9: ========');
 
-//     const burgerShack = {
-//       company: 'Burger Shack',
-//     };
+    const pizzaPalace = {
+      company: 'Pizza Palace',
+    };
 
-//     function composeMessage(customerName) {
-//       return `${customerName}, всегда рады вас видеть в «${this.company}».`;
-//     }
-//     // Пиши код ниже этой строки
+    const burgerShack = {
+      company: 'Burger Shack',
+    };
 
-//     const pizzaPalaceComposer = composeMessage.bind(pizzaPalace, 'Манго');
-//     const pizzaPalaceMessage = pizzaPalaceComposer();
-//     console.log(pizzaPalaceMessage);
+    function composeMessage(customerName) {
+      return `${customerName}, всегда рады вас видеть в «${this.company}».`;
+    }
+    // Пиши код ниже этой строки
 
-//     const burgerShackComposer = composeMessage.bind(burgerShack, 'Поли');
-//     const burgerShackMessage = burgerShackComposer();
-//     console.log(burgerShackMessage);
+    const pizzaPalaceComposer = composeMessage.bind(pizzaPalace, 'Манго');
+    const pizzaPalaceMessage = pizzaPalaceComposer();
+    console.log(pizzaPalaceMessage);
 
-//     console.log('Task 9: ');
-//   }
+    const burgerShackComposer = composeMessage.bind(burgerShack, 'Поли');
+    const burgerShackMessage = burgerShackComposer();
+    console.log(burgerShackMessage);
 
-//   /* *** Task 10 *** */
-//   // В объекте service реализуйте методы
-//   // - подписаться, который принимает почту как параметр, записывает ее в массив mailingList и возвращает строку  !!!!!!!!!!
-//   //    `Почта *АДРЕС ПОЧТЫ* добавлена в рассылку.`
-//   // - отписаться, который принимает почту как параметр, удаляет ее из массива mailingList и возвращает строку  !!!!!!!!!!
-//   //    `Почта *АДРЕС ПОЧТЫ* удалена из рассылки.`
-//   // Также отдельно реализуйте функцию logAndInvokeAction, которая принимает 2 параметра: email и action
-//   // Функция консолит `Выполняем действие с *АДРЕС ПОЧТЫ*.` и возвращает ВЫЗОВ функции с параметром почты.
-//   // После этого присвойте присвойте переменной firstInvoke вызов фукнции logAndInvokeAction
-//   // с новым адресом почты "kiwi@mail.uk" в контексте метода "подписаться" объекта service.
-//   // После этого присвойте присвойте переменной secondInvoke вызов фукнции logAndInvokeAction
-//   // с уже существующим адресом почты "kiwi@mail.uk" в контексте метода "отписаться" объекта service.
-//   // Используйте bind.
-//   {
-//     console.log('======== Task 10: ========');
+    console.log('Task 9: ');
+  }
 
-//     const service = {
-//       mailingList: ['mango@mail.com', 'poly@hotmail.de', 'ajax@jmail.net'],
-//       // !!! дополнить здесь
-//       subscribe(email) {
-//         this.mailingList.push(email);
-//         return `Почта ${email} добавлена в рассылку.`;
-//       },
-//       unsubscribe(email) {
-//         const emailsIndex = this.mailingList.indexOf(email);
+  /* *** Task 10 *** */
+  // В объекте service реализуйте методы
+  // - подписаться, который принимает почту как параметр, записывает ее в массив mailingList и возвращает строку  !!!!!!!!!!
+  //    `Почта *АДРЕС ПОЧТЫ* добавлена в рассылку.`
+  // - отписаться, который принимает почту как параметр, удаляет ее из массива mailingList и возвращает строку  !!!!!!!!!!
+  //    `Почта *АДРЕС ПОЧТЫ* удалена из рассылки.`
+  // Также отдельно реализуйте функцию logAndInvokeAction, которая принимает 2 параметра: email и action
+  // Функция консолит `Выполняем действие с *АДРЕС ПОЧТЫ*.` и возвращает ВЫЗОВ функции с параметром почты.
+  // После этого присвойте присвойте переменной firstInvoke вызов фукнции logAndInvokeAction
+  // с новым адресом почты "kiwi@mail.uk" в контексте метода "подписаться" объекта service.
+  // После этого присвойте присвойте переменной secondInvoke вызов фукнции logAndInvokeAction
+  // с уже существующим адресом почты "kiwi@mail.uk" в контексте метода "отписаться" объекта service.
+  // Используйте bind.
+  {
+    console.log('======== Task 10: ========');
 
-//         if (emailsIndex < 0) {
-//           return `Вы и так не подписаны на почту ${email} .`;
-//         }
+    const service = {
+      mailingList: ['mango@mail.com', 'poly@hotmail.de', 'ajax@jmail.net'],
+      // !!! дополнить здесь
+      subscribe(email) {
+        this.mailingList.push(email);
+        return `Почта ${email} добавлена в рассылку.`;
+      },
+      unsubscribe(email) {
+        const emailsIndex = this.mailingList.indexOf(email);
 
-//         this.mailingList.splice(emailsIndex, 1);
+        if (emailsIndex < 0) {
+          return `Вы и так не подписаны на почту ${email} .`;
+        }
 
-//         return `Почта ${email} удалена из рассылки.`;
-//       },
-//     };
+        this.mailingList.splice(emailsIndex, 1);
 
-//     function logAndInvokeAction(email, action) {
-//       console.log('action ', action);
+        return `Почта ${email} удалена из рассылки.`;
+      },
+    };
 
-//       console.log(`Выполняем действие с ${email}.`);
-//       return action(email);
-//     } // !!! дополнить здесь
+    function logAndInvokeAction(email, action) {
+      console.log('action ', action);
 
-//     // console.log(
-//     //   logAndInvokeAction('test@mail.ua', service.subscribe.bind(service))
-//     // );
+      console.log(`Выполняем действие с ${email}.`);
+      return action(email);
+    } // !!! дополнить здесь
 
-//     console.log('Task 10: ');
-//     const firstInvoke = logAndInvokeAction(
-//       'kiwi@mail.uk',
-//       service.subscribe.bind(service)
-//     ); // !!! дополнить здесь
-//     console.log(firstInvoke);
+    // console.log(
+    //   logAndInvokeAction('test@mail.ua', service.subscribe.bind(service))
+    // );
 
-//     // // Почта kiwi@mail.uk добавлена в рассылку.
+    console.log('Task 10: ');
+    const firstInvoke = logAndInvokeAction(
+      'kiwi@mail.uk',
+      service.subscribe.bind(service)
+    ); // !!! дополнить здесь
+    console.log(firstInvoke);
 
-//     console.log(service.mailingList);
+    // // Почта kiwi@mail.uk добавлена в рассылку.
 
-//     /* ['mango@mail.com',
-//         'poly@hotmail.de',
-//         'ajax@jmail.net',
-//         'kiwi@mail.uk']*/
+    console.log(service.mailingList);
 
-//     const secondInvoke = logAndInvokeAction(
-//       'kiwi@mail.uk',
-//       service.unsubscribe.bind(service)
-//     ); // !!! дополнить здесь
-//     console.log(secondInvoke);
-//     // Почта poly@hotmail.de удалена из рассылки.
+    /* ['mango@mail.com',
+        'poly@hotmail.de',
+        'ajax@jmail.net',
+        'kiwi@mail.uk']*/
 
-//     console.log(service.mailingList); // ['mango@mail.com', 'ajax@jmail.net', 'kiwi@mail.uk']
-//   }
-// }
+    const secondInvoke = logAndInvokeAction(
+      'kiwi@mail.uk',
+      service.unsubscribe.bind(service)
+    ); // !!! дополнить здесь
+    console.log(secondInvoke);
+    // Почта poly@hotmail.de удалена из рассылки.
+
+    console.log(service.mailingList); // ['mango@mail.com', 'ajax@jmail.net', 'kiwi@mail.uk']
+  }
+}
