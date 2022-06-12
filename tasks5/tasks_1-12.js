@@ -76,8 +76,11 @@
     return this.array.push(item);
   };
   Storage.prototype.removeItem = function (item) {
-    const itemIndex = this.array.indexOf(item);
-    return this.array.splice(itemIndex, 1);
+    return this.array.filter((element) => element !== item);
+    // const itemIndex = this.array.indexOf(item);
+    // if (itemIndex > 0) {
+    //   return this.array.splice(itemIndex, 1);
+    // }
   };
 
   // Пиши код выше этой строки
@@ -174,16 +177,29 @@
       return this.price;
     }
     setPrice(newPrice) {
-      return newPrice >= 0
+      // if (typeof newPrice !== 'number') {
+      //   return 'Вы ввели некорректные символы, ожидается число.';
+      // }
+      // return newPrice >= 0
+      //   ? (this.price = newPrice)
+      //   : `ОШИБКА! ${newPrice} < 0`;
+      // // console.log('typeof newPrice ', typeof newPrice);
+      // // console.log('newPrice ', newPrice);
+      return typeof newPrice !== 'number'
+        ? 'Вы ввели некорректные символы, ожидается число.'
+        : newPrice >= 0
         ? (this.price = newPrice)
         : `ОШИБКА! ${newPrice} < 0`;
     }
   }
   const newCar = new Car({ mark: 'BMV', model: 'A5', price: 100000 });
   console.log('Task 6: ', newCar.getPrice());
-  newCar.setPrice(10);
+
+  console.log('Task 6: ', newCar.setPrice(10));
   console.log('Task 6: ', newCar.getPrice());
-  newCar.setPrice(-10);
+  console.log('Task 6: ', newCar.setPrice('Not a number'));
+  console.log('Task 6: ', newCar.getPrice());
+
   console.log('Task 6: ', newCar.setPrice(-10));
   console.log('Task 6: ', newCar.getPrice());
   //
@@ -259,9 +275,15 @@
     }
 
     removeItem(removedItem) {
-      const indexRemovedItem = this.#item.indexOf(removedItem);
-      this.#item.splice(indexRemovedItem, 1);
-      return this.#item;
+      return (this.#item = this.#item.filter(
+        (element) => element !== removedItem
+      ));
+
+      // const indexRemovedItem = this.#item.indexOf(removedItem);
+      // if (indexRemovedItem > 0) {
+      //   this.#item.splice(indexRemovedItem, 1);
+      //   return this.#item;
+      // }
     }
   }
   // Пиши код выше этой строки
@@ -320,30 +342,34 @@
 // Всего в классе 3 приватных поля: марка, модель, цена
 {
   class Car {
+    #mark;
+    #model;
+    #price;
+
     constructor({ mark, model, price } = {}) {
-      this._mark = mark;
-      this._model = model;
-      this._price = price;
+      this.#mark = mark;
+      this.#model = model;
+      this.#price = price;
     }
     get mark() {
-      return this._mark;
+      return this.#mark;
     }
     set mark(newMark) {
-      this._mark = newMark;
+      this.#mark = newMark;
     }
 
     get model() {
-      return this._model;
+      return this.#model;
     }
     set model(newModel) {
-      this._model = newModel;
+      this.#model = newModel;
     }
 
     get price() {
-      return this._price;
+      return this.#price;
     }
     set price(newPrice) {
-      this._price = newPrice;
+      this.#price = newPrice;
     }
   }
   const newCar = new Car({ mark: 'BMV', model: 'A5', price: 100000 });
@@ -373,8 +399,8 @@
       return this.#price;
     }
     set price(newPrice) {
-      newPrice > this.maxPrice
-        ? 'Too much babla zahotel'
+      newPrice > Car.maxPrice
+        ? 'Новая цена больше максимальной!'
         : (this.#price = newPrice);
     }
     // Пиши код выше этой строки
