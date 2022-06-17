@@ -61,24 +61,19 @@
 
     // Проверка на массив
     if (Array.isArray(firstArray) && Array.isArray(secondArray)) {
-      // Проверка, является ли элемент числом
-      if (
-        firstArray.every((element) => Number.isFinite(element)) &&
-        secondArray.every((element) => Number.isFinite(element))
-      ) {
-        firstArray.forEach((firstArrayElement) => {
-          if (
-            secondArray.some(
-              (secondArrayElement) => secondArrayElement === firstArrayElement
-            )
-          ) {
-            commonElements.push(firstArrayElement);
-          }
-        });
-      }
+      firstArray.forEach((element) => {
+        // Проверка, является ли элемент числом
+        if (
+          typeof element === 'number' &&
+          /* Проверка, есть ли такое же число во втором массиве */
+          secondArray.some((elementSecondArr) => element === elementSecondArr)
+        ) {
+          return commonElements.push(element);
+        }
+      });
+
+      return commonElements;
     }
-    // Пиши код выше этой строки
-    return commonElements;
   }
   console.log(
     'Task 3: ',
@@ -125,9 +120,9 @@
 // getWordsWithSelectedLength - это функциональное выражение с синтаксисом стрелочной функции.
 {
   // Пиши код ниже этой строки
-  const getWordsWithSelectedLength = (string, letters) => {
-    if (typeof string === 'string' && typeof letters === 'number') {
-      return string.split(' ').filter((word) => word.length === letters);
+  const getWordsWithSelectedLength = (string, searchedLength) => {
+    if (typeof string === 'string' && typeof searchedLength === 'number') {
+      return string.split(' ').filter((word) => word.length === searchedLength);
     }
   };
 
@@ -293,7 +288,7 @@
   // Пиши код ниже этой строки
   const topBooksNotSorted = books.filter((book) => book.rating > MIN_RATING);
   const topBooks = topBooksNotSorted.sort(
-    (firstBook, secondBook) => firstBook.rating - secondBook.rating
+    (firstBook, secondBook) => secondBook.rating - firstBook.rating
   );
   const topBooksTitle = topBooks.map((book) => book.title);
 

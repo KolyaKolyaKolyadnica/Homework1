@@ -86,7 +86,10 @@
   // Пиши код ниже этой строки
 
   const getNamesSortedByFriendCount = (arr) => {
-    return arr.map((book) => book.friends).sort((a, b) => b.length - a.length);
+    // return arr.map((user) => user.friends).sort((a, b) => b.length - a.length);
+    return [...arr]
+      .sort((a, b) => b.friends.length - a.friends.length)
+      .map((user) => user.name);
   };
 
   console.log('Task 28: ', getNamesSortedByFriendCount(users));
@@ -112,12 +115,15 @@
 
   // Пиши код ниже этой строки
   const getAverageAgeByGender = (arr, sex) => {
-    return Math.round(
-      arr
-        .filter((book) => book.gender === sex)
-        .reduce((acc, next) => acc + next.age, 0) /
-        arr.filter((book) => book.gender === sex).length
-    ); // А насколько это читаемый код?
+    const fliteredArr = arr.filter((book) => book.gender === sex);
+
+    return fliteredArr.reduce(
+      (acc, item, index, array) =>
+        index === array.length - 1
+          ? Math.round((acc + item.age) / fliteredArr.length)
+          : acc + item.age,
+      0
+    );
   };
   // Пиши код выше этой строки
 
@@ -149,6 +155,30 @@
   // Пиши код ниже этой строки
 
   // Пиши код ниже этой строки
+
+  const getTransactionsSummary = (transactions) => {
+    return transactions.reduce(
+      (acc, item, index, array) => {
+        if (item.type === 'income') {
+          acc.total += item.amount;
+          if (acc.maxIncome < item.amount) {
+            acc.maxIncome = item.amount;
+          }
+          return acc;
+        }
+        if (item.type === 'expense') {
+          acc.total -= item.amount;
+          if (acc.maxExpense < item.amount) {
+            acc.maxExpense = item.amount;
+          }
+          return acc;
+        }
+      },
+      { total: 0, maxIncome: 0, maxExpense: 0 }
+    );
+  };
+
+  /*
   const getTransactionsSummary = (transactions) => {
     const sumIncome = transactions
       .filter((transaction) => transaction.type === 'income')
@@ -184,6 +214,7 @@
       maxExpense,
     };
   };
+  */
   // Пиши код выше этой строки
 
   console.log('Task 30: ', getTransactionsSummary(transactions)); // { total: 1600, maxIncome: 2400, maxExpense: 1700 }
@@ -204,4 +235,21 @@
 //   console.log(nbYear(1500, 5, 100, 5000));
 //   console.log(nbYear(1500000, 2.5, 10000, 2000000));
 //   console.log(nbYear(1500000, 0.25, 1000, 2000000));
+// }
+// {
+//   function grow(x) {
+//     return x.reduce((acc, next) => acc * next);
+//   }
+//   // grow([4, 1, 1, 1, 4]);
+//   console.log(grow([4, 1, 1, 1, 4]));
+// }
+// {
+//   function oddOrEven(array) {
+//     return array.length === 0
+//       ? 'even'
+//       : array.reduce((acc, cur) => acc + cur) % 2 === 0 || array.length === 0
+//       ? 'even'
+//       : 'odd';
+//   }
+//   console.log(oddOrEven([]));
 // }

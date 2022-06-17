@@ -31,7 +31,10 @@
 
   // With Set new Set([...users].flatMap((user) => user.friends));
 
-  const getFriends = (arr) => new Set([...arr].flatMap((user) => user.friends));
+  // const getFriends = (arr) => new Set([...arr].flatMap((user) => user.friends)); //Вернет обьект
+  const getFriends = (arr) => [
+    ...new Set([...arr].flatMap((user) => user.friends)),
+  ]; //Вернет массив
 
   // Пиши код выше этой строки
 
@@ -258,7 +261,10 @@
   const descendingReleaseDates = releaseDates.sort((a, b) => b - a);
   // const descendingReleaseDates = releaseDates.sort().reverse();
 
-  const reversedAlphabeticalAuthors = authors.sort().reverse();
+  // const reversedAlphabeticalAuthors = authors.sort().reverse();
+  const reversedAlphabeticalAuthors = authors.sort((a, b) =>
+    b.localeCompare(a)
+  );
 
   console.log('Task 22: ', descendingReleaseDates, reversedAlphabeticalAuthors);
 }
