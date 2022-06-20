@@ -253,3 +253,43 @@
 //   }
 //   console.log(oddOrEven([]));
 // }
+{
+  function highAndLow(numbers) {
+    const arrNumbers = numbers.split(' ').map((number) => Number(number));
+    const maxNumer = Math.max.apply(null, arrNumbers);
+    const minNumer = Math.min.apply(null, arrNumbers);
+    return `${maxNumer} ${minNumer}`;
+  }
+
+  console.log(highAndLow('8 3 -5 42 -1 0 0 -9 4 7 4 -4'));
+}
+{
+  function removeSmallest(numbers) {
+    // throw "TODO: removeSmallest";
+    // if (numbers.length === 0) {
+    //   return [];
+    // }
+    // let newNumbers = numbers;
+    // newNumbers.splice(newNumbers.indexOf(Math.min.apply(0, newNumbers)), 1);
+    // return newNumbers;
+
+    let arr = [];
+    let i = 0;
+
+    numbers.forEach((number) => {
+      if (number === Math.min.apply(0, numbers)) {
+        i += 1;
+        if (i > 1) {
+          arr.push(number);
+        }
+      }
+      if (number !== Math.min.apply(0, numbers)) {
+        arr.push(number);
+      }
+    });
+    return numbers.length === 0 ? [] : arr;
+  }
+  console.log('removeSmallest ', removeSmallest([1, 2, 3, 4, 5]));
+  console.log('removeSmallest ', removeSmallest([5, 3, 2, 1, 4]));
+  console.log('removeSmallest ', removeSmallest([2, 2, 1, 2, 1]));
+}
